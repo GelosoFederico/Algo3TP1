@@ -20,13 +20,14 @@ CanalTest >> test00CreoCanalYTiene0Usuarios [
 { #category : #tests }
 CanalTest >> test01CreoCanalAgregoUsuarioYLoTiene [
 	"Arrange"
-	| canal usuario |
+	| canal usuario nombres|
 	canal := Canal new.
 	usuario := Usuario conNombre: 'Carlos'.
 	
 	"Act"
 	canal agregarUsuario: usuario. 
+	nombres := canal nombresUsuarios.
 	
 	"Assert"
-	self assert: canal nombresUsuario equals: 'Carlos'. 
+	self assert: nombres equals: 'Carlos'. 
 ]
