@@ -39,6 +39,13 @@ Usuario >> notificaciones [
 ]
 
 { #category : #'as yet unclassified' }
+Usuario >> notificacionesDeUsuario: nombreUsuario [
+	(nombre sameAs: nombreUsuario) ifTrue: [ 
+		^ self notificaciones 
+	]. 
+]
+
+{ #category : #'as yet unclassified' }
 Usuario >> recibeMensaje: mensaje [
 	( (mensaje findString: ('@',self nombre)) > 0) ifTrue: [ 
 		self recibeMensajeComoNotificacion: mensaje ].

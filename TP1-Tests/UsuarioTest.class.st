@@ -125,3 +125,29 @@ UsuarioTest >> test08UsuarioRecibeMensajeConSuNombreArrobadSinMayusculaYNoAparec
 	self assert: usuario notificaciones equals: ''.
 
 ]
+
+{ #category : #tests }
+UsuarioTest >> test09UsuarioRecibeMensajesYMuestraNotificacioensCuandoPreguntaPorSuNombre [
+	"Arrange"
+	| usuario |
+	usuario := Usuario conNombre: 'Carlos'.
+	
+	"Act"
+	usuario recibeMensaje: 'Hola' para: 'Carlos'.
+	
+	"Assert"
+	self assert: (usuario notificacionesDeUsuario: 'Carlos') equals: 'Hola'.
+]
+
+{ #category : #tests }
+UsuarioTest >> test10UsuarioRecibeMensajesYNoMuestraNotificacioensCuandoPreguntaPorOtroNombre [
+	"Arrange"
+	| usuario |
+	usuario := Usuario conNombre: 'Carlos'.
+	
+	"Act"
+	usuario recibeMensaje: 'Hola' para: 'Juan'.
+	
+	"Assert"
+	self assert: (usuario notificacionesDeUsuario: 'Carlos') equals: ''.
+]
