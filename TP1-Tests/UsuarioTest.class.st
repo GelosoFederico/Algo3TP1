@@ -46,7 +46,7 @@ UsuarioTest >> test02CreoUsuarioYNoTieneNotificaciones [
 ]
 
 { #category : #tests }
-UsuarioTest >> test03MandoMensajeAUsuarioYLoRecibeComoNotificacion [
+UsuarioTest >> test03MandoMensajeAUsuarioYNoLoRecibeComoNotificacion [
 	"Arrange"
 	| usuario |
 	usuario := Usuario new.
@@ -55,7 +55,7 @@ UsuarioTest >> test03MandoMensajeAUsuarioYLoRecibeComoNotificacion [
 	usuario recibeMensaje: 'hola'.
 	
 	"Assert"
-	self assert: usuario notificaciones equals: 'hola'.
+	self assert: usuario notificaciones equals: ''.
 ]
 
 { #category : #tests }
@@ -83,4 +83,45 @@ UsuarioTest >> test05MandoMensajeParaUsuarioYLoRecibeComoNotificacion [
 	
 	"Assert"
 	self assert: usuario notificaciones equals: 'Hola Carlos'.
+]
+
+{ #category : #tests }
+UsuarioTest >> test06Mando2MensajesAlUsuarioYLosGuardaYMuestraBien [
+	"Arrange"
+	| usuario |
+	usuario := Usuario conNombre: 'Carlos'.
+	
+	"Act"
+	usuario recibeMensaje: 'Hola che' para: 'Carlos'.
+	usuario recibeMensaje: 'Como va?' para: 'Carlos'.
+	
+	"Assert"
+	self assert: usuario notificaciones equals: 'Hola che | Como va?'.
+]
+
+{ #category : #tests }
+UsuarioTest >> test07UsuarioRecibeMensajeConSuNombreArrobadoYLoRecibeComoNotificacion [
+	"Arrange"
+	| usuario |
+	usuario := Usuario conNombre: 'Carlos'.
+	
+	"Act"
+	usuario recibeMensaje: 'Hola @Carlos'.
+	
+	"Assert"
+	self assert: usuario notificaciones equals: 'Hola @Carlos'.
+]
+
+{ #category : #tests }
+UsuarioTest >> test08UsuarioRecibeMensajeConSuNombreArrobadSinMayusculaYNoApareceComoNotificacion [
+	"Arrange"
+	| usuario |
+	usuario := Usuario conNombre: 'Carlos'.
+	
+	"Act"
+	usuario recibeMensaje: 'Hola @carlos'.
+	
+	"Assert"
+	self assert: usuario notificaciones equals: ''.
+
 ]

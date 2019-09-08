@@ -35,22 +35,23 @@ Usuario >> nombre: unNombre [
 
 { #category : #'as yet unclassified' }
 Usuario >> notificaciones [
-		"TODO como los nombres de usuarios, hacer esto mas OO, y el collect deberia ser lo que meto en stringeados."
-	| mensajesStringeados |
-	notificaciones isEmpty ifTrue: [ ^ '' ].
-	mensajesStringeados := notificaciones asCommaString.
-	mensajesStringeados := mensajesStringeados copyReplaceAll: ',' with: ' |'.
-	^ mensajesStringeados. 
+	^ notificaciones joinUsing: ' | '.
 ]
 
 { #category : #'as yet unclassified' }
 Usuario >> recibeMensaje: mensaje [
-	notificaciones add:mensaje.
+	( (mensaje findString: ('@',self nombre)) > 0) ifTrue: [ 
+		self recibeMensajeComoNotificacion: mensaje ].
 ]
 
 { #category : #'as yet unclassified' }
 Usuario >> recibeMensaje: mensaje para: nombreUsuario [
 	(nombre sameAs: nombreUsuario) ifTrue: [ 
-		self recibeMensaje: mensaje 
+		self recibeMensajeComoNotificacion: mensaje 
 	]. 
+]
+
+{ #category : #private }
+Usuario >> recibeMensajeComoNotificacion: mensaje [
+	notificaciones add: mensaje.
 ]

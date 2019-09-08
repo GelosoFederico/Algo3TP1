@@ -25,7 +25,7 @@ Canal >> agregarUsuario: nuevoUsuario [
 
 { #category : #'as yet unclassified' }
 Canal >> cantidadUsuarios [
-	^ 0.
+	^ usuarios size.
 ]
 
 { #category : #initialization }
@@ -37,11 +37,8 @@ Canal >> initialize [
 
 { #category : #accessing }
 Canal >> mensajes [
-	"TODO como los nombres de usuarios, hacer esto mas OO, y el collect deberia ser lo que meto en stringeados."
-	| mensajesStringeados |
-	mensajesStringeados := mensajes asCommaString.
-	mensajesStringeados := mensajesStringeados copyReplaceAll: ',' with: ' |'.
-	^ mensajesStringeados. 
+	^ mensajes joinUsing: ' | '.
+
 ]
 
 { #category : #accessing }
@@ -57,18 +54,16 @@ Canal >> nombre: nuevoNombre [
 
 { #category : #'as yet unclassified' }
 Canal >> nombresUsuarios [
-	"TODO hacer esto mas OO, y el collect deberia ser lo que meto en stringeados."
-	| usuariosStringeados |
-	usuariosStringeados := OrderedCollection new.
-	usuarios do: [ :usuario | 
-		usuariosStringeados add: (usuario nombre). 
+	| nombresUsuarios |
+	nombresUsuarios := usuarios collect: [ :usuario | 
+		usuario nombre. 
 	].
-	usuariosStringeados := usuariosStringeados asCommaString.
-	usuariosStringeados := usuariosStringeados copyReplaceAll: ',' with: ' |'.
-	^ usuariosStringeados. 
+	^ nombresUsuarios joinUsing: ' | '.
 ]
 
 { #category : #'as yet unclassified' }
 Canal >> recibeMensaje: mensaje [
 	mensajes add: mensaje.
+	usuarios do: [ :usuario|
+		usuario recibeMensaje: mensaje ].
 ]
