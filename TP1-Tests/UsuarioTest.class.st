@@ -57,3 +57,30 @@ UsuarioTest >> test03MandoMensajeAUsuarioYLoRecibeComoNotificacion [
 	"Assert"
 	self assert: usuario notificaciones equals: 'hola'.
 ]
+
+{ #category : #tests }
+UsuarioTest >> test04MandoMensajeAUsuarioQueEraParaOtroYNoLoRecibeComoNotificacion [
+	"Arrange"
+	| usuario |
+	usuario := Usuario conNombre: 'Carlos'.
+	
+	"Act"
+	usuario recibeMensaje: 'Hola Juan' para: 'Juan'.
+	
+	"Assert"
+	self assert: usuario notificaciones equals: ''.
+	
+]
+
+{ #category : #tests }
+UsuarioTest >> test05MandoMensajeParaUsuarioYLoRecibeComoNotificacion [
+	"Arrange"
+	| usuario |
+	usuario := Usuario conNombre: 'Carlos'.
+	
+	"Act"
+	usuario recibeMensaje: 'Hola Carlos' para: 'Carlos'.
+	
+	"Assert"
+	self assert: usuario notificaciones equals: 'Hola Carlos'.
+]
