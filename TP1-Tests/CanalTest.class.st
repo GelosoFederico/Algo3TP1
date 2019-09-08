@@ -31,3 +31,42 @@ CanalTest >> test01CreoCanalAgregoUsuarioYLoTiene [
 	"Assert"
 	self assert: nombres equals: 'Carlos'. 
 ]
+
+{ #category : #tests }
+CanalTest >> test02CreoCanalLePongoNombreYTieneEseNombre [
+	"Arrange"
+	| canal |
+	canal := Canal new. 
+
+	"Act"
+	canal nombre: 'anuncios'.
+	
+	"Assert"
+	self assert: canal nombre equals: 'anuncios'.
+
+]
+
+{ #category : #tests }
+CanalTest >> test03CreoCanalConNombreYTieneEseNombre [
+	"Arrange"
+	| canal |
+	
+	"Act"
+	canal := Canal conNombre: 'anuncios'.
+	
+	"Assert"
+	self assert: canal nombre equals: 'anuncios'.
+]
+
+{ #category : #tests }
+CanalTest >> test04CanalRecibeMensajeYLoGuarda [
+	"arrange"
+	| canal |
+	canal := Canal new.
+	
+	"Act"
+	canal recibeMensaje: 'Hola canal'.
+	
+	"Assert"
+	self assert: canal mensajes equals: 'Hola canal'.
+]
