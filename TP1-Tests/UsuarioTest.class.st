@@ -151,3 +151,30 @@ UsuarioTest >> test10UsuarioRecibeMensajesYNoMuestraNotificacioensCuandoPregunta
 	"Assert"
 	self assert: (usuario notificacionesDeUsuario: 'Carlos') equals: ''.
 ]
+
+{ #category : #tests }
+UsuarioTest >> test11UsuarioRecibeMensajeDeMasDe4CaracteresYLoMuestraAcortadoA4 [
+	"Arrange"
+	| usuario |
+	usuario := Usuario conNombre: 'Carlos'.
+	
+	"Act"
+	usuario recibeMensajeComoNotificacion: 'Hola como va?'.
+	
+	"Assert"
+	self assert: (usuario notificacionesDeUsuario: 'Carlos' resumidasALongitud: 4) equals: 'Hola...'.
+]
+
+{ #category : #tests }
+UsuarioTest >> test12UsuarioRecibeMensajeDeMasDe4CaracteresImprimeAcortadoA4YDespuesLoImprimeNormal [
+	"Arrange"
+	| usuario |
+	usuario := Usuario conNombre: 'Carlos'.
+	
+	"Act"
+	usuario recibeMensajeComoNotificacion: 'Hola como va?'.
+	
+	"Assert"
+	self assert: (usuario notificacionesDeUsuario: 'Carlos' resumidasALongitud: 4) equals: 'Hola...'.
+	self assert: (usuario notificacionesDeUsuario: 'Carlos' ) equals: 'Hola como va?'.
+]

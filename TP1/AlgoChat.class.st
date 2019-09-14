@@ -2,49 +2,51 @@ Class {
 	#name : #AlgoChat,
 	#superclass : #Object,
 	#instVars : [
-		'usuarios'
+		'usuarios',
+		'canales'
 	],
 	#category : #TP1
 }
 
 { #category : #'as yet unclassified' }
+AlgoChat >> agregarCanalConNombre: nombreCanal [
+	canales at: nombreCanal put: (Canal conNombre: nombreCanal).
+]
+
+{ #category : #'as yet unclassified' }
 AlgoChat >> agregarUsuarioConNombre: nombre [
-	usuarios add: (Usuario conNombre: nombre).
+	usuarios at: nombre put: (Usuario conNombre: nombre).
 ]
 
 { #category : #'as yet unclassified' }
 AlgoChat >> enviarMensaje: mensaje aUsuario: usuarioDestino [
-	usuarios do: [ :usuario|
-		usuario recibeMensaje: mensaje para: usuarioDestino ].
+	(usuarios at: usuarioDestino) recibeMensaje: mensaje para: usuarioDestino.
 ]
 
 { #category : #'as yet unclassified' }
 AlgoChat >> getCantidadCanales [ 
-	^ 0.
+	^ canales size.
 ]
 
 { #category : #'as yet unclassified' }
 AlgoChat >> getCantidadUsuarios [
-	^ 0.
+	^ usuarios size.
 ]
 
 { #category : #'as yet unclassified' }
 AlgoChat >> getNotificacionesDeUsuario: nombreUsuario [
-	|salida|
-	salida := usuarios collect: [ :usuario|
-		usuario notificacionesDeUsuario: nombreUsuario  ].
-	^ salida joinUsing: ' | '.
+	^ (usuarios at: nombreUsuario) notificacionesDeUsuario: nombreUsuario.
+
 ]
 
 { #category : #'as yet unclassified' }
 AlgoChat >> getNotificacionesDeUsuario: nombreUsuario resumidasALongitud: long [
-	|salida|
-	salida := usuarios collect: [ :usuario|
-		usuario notificacionesDeUsuario: nombreUsuario  ].
-	^ salida joinUsing: ' | '.
+	^ (usuarios at: nombreUsuario) notificacionesDeUsuario: nombreUsuario resumidasALongitud: long.
+
 ]
 
 { #category : #initialization }
 AlgoChat >> initialize [
-	usuarios := OrderedCollection new.
+	usuarios := Dictionary new.
+	canales := Dictionary new.
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #AlgoChatTest,
 	#superclass : #TestCase,
-	#category : #'AlgoChat-Tests'
+	#category : #'TP1-Tests'
 }
 
 { #category : #tests }

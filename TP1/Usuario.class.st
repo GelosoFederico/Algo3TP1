@@ -46,6 +46,28 @@ Usuario >> notificacionesDeUsuario: nombreUsuario [
 ]
 
 { #category : #'as yet unclassified' }
+Usuario >> notificacionesDeUsuario: usuarioNombre resumidasALongitud: cantidadCaracteres [
+	(nombre sameAs: usuarioNombre) ifTrue: [ 
+		^ self notificacionesResumidasALongitud: cantidadCaracteres.
+	]. 
+]
+
+{ #category : #'as yet unclassified' }
+Usuario >> notificacionesResumidasALongitud: cantidadCaracteres [
+	| notificacionesCopia |
+	notificacionesCopia := notificaciones collect: [  :notificacion|
+		(notificacion size > cantidadCaracteres) 
+		ifTrue: [ 
+			(notificacion truncateTo: cantidadCaracteres) , '...'.
+			 ]
+		ifFalse: [ 
+			notificacion.
+			 ].
+	].
+	^ notificacionesCopia joinUsing: ' | '.
+]
+
+{ #category : #'as yet unclassified' }
 Usuario >> recibeMensaje: mensaje [
 	( (mensaje findString: ('@',self nombre)) > 0) ifTrue: [ 
 		self recibeMensajeComoNotificacion: mensaje ].
