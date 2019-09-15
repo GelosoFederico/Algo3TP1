@@ -125,3 +125,28 @@ UsuarioTest >> test12UsuarioRecibeMensajeDeMasDe4CaracteresImprimeAcortadoA4YDes
 	self assert: (usuario notificacionesResumidasALongitud: 4) equals: 'Hola...'.
 	self assert: (usuario notificaciones ) equals: 'Hola como va?'.
 ]
+
+{ #category : #tests }
+UsuarioTest >> test13UsuarioAgregaPalabrasClavesYRecibeMensajeConYSinEsasPalabras [
+	"Arrange"
+	| usuario |
+	usuario := Usuario conNombre: 'Homero'.
+	usuario agregarPalabraClave: 'Homeros'.
+	"Act"
+	usuario recibeMensaje: 'No se admiten Homeros'.
+	usuario recibeMensaje: 'Solo se permite uno'.	
+	"Assert"
+	self assert: (usuario notificaciones ) equals: 'No se admiten Homeros'.
+]
+
+{ #category : #tests }
+UsuarioTest >> test14UsuarioPausaUnCanalYNoRecibeMensajesDeAhi [
+	"Arrange"
+	| usuario |
+	usuario := Usuario conNombre: 'Nelson'.
+	usuario pausarCanal: 'general'.
+	"Act"
+	usuario recibeMensaje: 'Quien es @Nelson' delCanal: 'general'.	
+	"Assert"
+	self assert: (usuario notificaciones ) equals: ''.
+]

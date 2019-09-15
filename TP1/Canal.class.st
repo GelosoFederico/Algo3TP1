@@ -20,17 +20,17 @@ Canal class >> conNombre: nombre [
 
 { #category : #'as yet unclassified' }
 Canal >> agregarUsuario: nuevoUsuario [
-	usuarios add: nuevoUsuario.
+	usuarios agregarUsuario: nuevoUsuario.
 ]
 
 { #category : #'as yet unclassified' }
 Canal >> cantidadUsuarios [
-	^ usuarios size.
+	^ usuarios cantidadUsuarios.
 ]
 
 { #category : #initialization }
 Canal >> initialize [ 
-	usuarios := OrderedCollection new.
+	usuarios := ConjuntoDeUsuarios new.
 	mensajes := ManejadorDeMensajes new.	
 	nombre := String new.
 ]
@@ -59,12 +59,16 @@ Canal >> nombre: nuevoNombre [
 
 { #category : #'as yet unclassified' }
 Canal >> nombresUsuarios [
-	^ (ManejadorDeMensajes conUsuarios: usuarios) comoCadenaConcatenadaCon: ',' .
+	^ usuarios nombresUsuarios.
 ]
 
 { #category : #'as yet unclassified' }
 Canal >> recibeMensaje: mensaje [
 	mensajes agregar: mensaje.
-	usuarios do: [ :usuario|
-		usuario recibeMensaje: mensaje ].
+	usuarios recibenMensaje: mensaje delCanal: self nombre. 
+]
+
+{ #category : #'private ' }
+Canal >> usuarios: conjuntoDeUsuarios [
+	usuarios := conjuntoDeUsuarios.
 ]

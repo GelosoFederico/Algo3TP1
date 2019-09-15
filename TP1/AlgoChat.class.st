@@ -15,30 +15,33 @@ AlgoChat >> agregarCanalConNombre: nombreCanal [
 ]
 
 { #category : #'as yet unclassified' }
+AlgoChat >> agregarPalabraClave: palabraClave alUsuario: usuarioNombre [
+	(usuarios conNombre: usuarioNombre) agregarPalabraClave: palabraClave. 
+]
+
+{ #category : #'as yet unclassified' }
 AlgoChat >> agregarUsuario: nombreUsuario alCanal: nombreCanal [
-	(canales at: nombreCanal) agregarUsuario: (usuarios at: nombreUsuario).
+	(canales at: nombreCanal) agregarUsuario: (usuarios conNombre: nombreUsuario).
 ]
 
 { #category : #'as yet unclassified' }
 AlgoChat >> agregarUsuarioConNombre: nombre [
-	usuarios at: nombre put: (Usuario conNombre: nombre).
+	usuarios agregarUsuarioConNombre: nombre.
+
 ]
 
 { #category : #'as yet unclassified' }
 AlgoChat >> crearConversacionConUsuarios: cadenaConUsuarios [
-	| usuariosNombres conversacion|
-	usuariosNombres := cadenaConUsuarios splitOn: ','.
-	conversacion := Conversacion new.
-	usuariosNombres do: [ :nombreUsuario|
-		conversacion agregarUsuario: (usuarios at: nombreUsuario).
-		 ].
-	conversaciones at: conversacion nombre put: conversacion.
+	| conversacion subconjuntoUsuarios|
+	subconjuntoUsuarios := usuarios obtenerSubconjuntoDeUsuarios: cadenaConUsuarios.
+	conversacion := Conversacion conConjuntoDeUsuarios: subconjuntoUsuarios .
+	conversaciones at: cadenaConUsuarios put: conversacion.
 	
 ]
 
 { #category : #'as yet unclassified' }
 AlgoChat >> enviarMensaje: mensaje aUsuario: usuarioDestino [
-	(usuarios at: usuarioDestino) recibeMensajeDirecto: mensaje.
+	(usuarios conNombre: usuarioDestino) recibeMensajeDirecto: mensaje.
 ]
 
 { #category : #'as yet unclassified' }
@@ -48,7 +51,7 @@ AlgoChat >> getCantidadCanales [
 
 { #category : #'as yet unclassified' }
 AlgoChat >> getCantidadUsuarios [
-	^ usuarios size.
+	^ usuarios cantidadUsuarios.
 ]
 
 { #category : #'as yet unclassified' }
@@ -58,19 +61,19 @@ AlgoChat >> getMensajesDeConversacion: conversacionNombre [
 
 { #category : #'as yet unclassified' }
 AlgoChat >> getNotificacionesDeUsuario: nombreUsuario [
-	^ (usuarios at: nombreUsuario) notificaciones.
+	^ usuarios notificacionesDeUsuario: nombreUsuario.
 
 ]
 
 { #category : #'as yet unclassified' }
 AlgoChat >> getNotificacionesDeUsuario: nombreUsuario resumidasALongitud: long [
-	^ (usuarios at: nombreUsuario) notificacionesResumidasALongitud: long.
+	^ usuarios notificacionesDeUsuario: nombreUsuario resumidasALongitud: long.
 
 ]
 
 { #category : #initialization }
 AlgoChat >> initialize [
-	usuarios := Dictionary new.
+	usuarios := ConjuntoDeUsuarios new.
 	canales := Dictionary new.
 	conversaciones := Dictionary new.
 ]
@@ -83,6 +86,11 @@ AlgoChat >> mensajesDelCanal: canalNombre [
 { #category : #'as yet unclassified' }
 AlgoChat >> mensajesDelCanal: canalNombre resumidosALongitud: longitud [
 	^ (canales at: canalNombre) mensajesResumidosALongitud: longitud.
+]
+
+{ #category : #'as yet unclassified' }
+AlgoChat >> pausarPalabrasDeCanal: nombreCanal paraUsuario: nombreUsuario [
+	(usuarios conNombre: nombreUsuario) pausarCanal: nombreCanal.
 ]
 
 { #category : #'as yet unclassified' }

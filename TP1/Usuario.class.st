@@ -3,7 +3,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'nombre',
-		'notificaciones'
+		'notificaciones',
+		'palabrasClave',
+		'canalesPausados'
 	],
 	#category : #TP1
 }
@@ -16,10 +18,17 @@ Usuario class >> conNombre: nombre [
 	^ usuario.
 ]
 
+{ #category : #'as yet unclassified' }
+Usuario >> agregarPalabraClave: palabra [
+	palabrasClave add: palabra.
+]
+
 { #category : #initialization }
 Usuario >> initialize [
 	nombre := String new.
 	notificaciones := ManejadorDeMensajes new.
+	palabrasClave := OrderedCollection new.
+	canalesPausados := OrderedCollection new.
 ]
 
 { #category : #accessing }
@@ -30,6 +39,7 @@ Usuario >> nombre [
 
 { #category : #accessing }
 Usuario >> nombre: unNombre [
+	palabrasClave add: ('@',unNombre).
 	nombre := unNombre.
 ]
 
@@ -43,10 +53,23 @@ Usuario >> notificacionesResumidasALongitud: cantidadCaracteres [
 	^ notificaciones comoCadenaConcatenadaResumidaALongitud: cantidadCaracteres.
 ]
 
+{ #category : #'as yet unclassified' }
+Usuario >> pausarCanal: canalNombre [
+	canalesPausados add: canalNombre.
+]
+
 { #category : #'input/output' }
 Usuario >> recibeMensaje: mensaje [
-	( (mensaje findString: ('@',self nombre)) > 0) ifTrue: [ 
+	( (mensaje findAnySubstring: palabrasClave startingAt: 1) < (mensaje size)) ifTrue: [ 
 		self recibeMensajeComoNotificacion: mensaje ].
+]
+
+{ #category : #'as yet unclassified' }
+Usuario >> recibeMensaje: mensaje delCanal: canalNombre [
+	( (mensaje findAnySubstring: palabrasClave startingAt: 1) < (mensaje size)) ifTrue: [ 
+		(canalNombre findAnySubstring: canalesPausados startingAt: 1) >= (canalNombre size) ifTrue: [ 
+			self recibeMensajeComoNotificacion: mensaje 	 ]
+		].
 ]
 
 { #category : #private }
