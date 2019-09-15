@@ -50,3 +50,18 @@ AlgoChat >> initialize [
 	usuarios := Dictionary new.
 	canales := Dictionary new.
 ]
+
+{ #category : #'as yet unclassified' }
+AlgoChat >> mensajesDelCanal: canalNombre [
+	^ (canales at: canalNombre) mensajes.
+]
+
+{ #category : #'as yet unclassified' }
+AlgoChat >> mensajesDelCanal: canalNombre resumidosALongitud: longitud [
+	^ (canales at: canalNombre) mensajes resumidosALongitud: longitud.
+]
+
+{ #category : #'as yet unclassified' }
+AlgoChat >> publicarMensaje: mensaje enCanal: canalDestino [
+	(canales at: canalDestino) recibeMensaje: mensaje.
+]

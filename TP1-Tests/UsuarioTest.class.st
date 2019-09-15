@@ -127,7 +127,7 @@ UsuarioTest >> test08UsuarioRecibeMensajeConSuNombreArrobadSinMayusculaYNoAparec
 ]
 
 { #category : #tests }
-UsuarioTest >> test09UsuarioRecibeMensajesYMuestraNotificacioensCuandoPreguntaPorSuNombre [
+UsuarioTest >> test09UsuarioRecibeMensajesYMuestraNotificacionesCuandoPreguntaPorSuNombre [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Carlos'.
@@ -140,7 +140,7 @@ UsuarioTest >> test09UsuarioRecibeMensajesYMuestraNotificacioensCuandoPreguntaPo
 ]
 
 { #category : #tests }
-UsuarioTest >> test10UsuarioRecibeMensajesYNoMuestraNotificacioensCuandoPreguntaPorOtroNombre [
+UsuarioTest >> test10UsuarioRecibeMensajesYNoMuestraNotificacionesCuandoPreguntaPorOtroNombre [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Carlos'.
