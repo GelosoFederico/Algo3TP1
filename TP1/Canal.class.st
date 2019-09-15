@@ -59,7 +59,7 @@ Canal >> nombre: nuevoNombre [
 
 { #category : #'as yet unclassified' }
 Canal >> nombresUsuarios [
-	^ (ManejadorDeMensajes conUsuarios: usuarios) comoCadenaConcatenada .
+	^ (ManejadorDeMensajes conUsuarios: usuarios) comoCadenaConcatenadaCon: ',' .
 ]
 
 { #category : #'as yet unclassified' }

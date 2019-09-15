@@ -168,5 +168,5 @@ CanalTest >> test10CreoCanalConVariosUsuariosYMeMuestraLosNombres [
 	nombres := canal nombresUsuarios.
 	
 	"Assert"
-	self assert: nombres equals: 'Carlos | Juan | Andrea'. 	
+	self assert: nombres equals: 'Carlos,Juan,Andrea'. 	
 ]

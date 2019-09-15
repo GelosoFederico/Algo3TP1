@@ -36,6 +36,11 @@ ManejadorDeMensajes >> comoCadenaConcatenada [
 ]
 
 { #category : #'as yet unclassified' }
+ManejadorDeMensajes >> comoCadenaConcatenadaCon: separador [
+	^ mensajes joinUsing: separador.
+]
+
+{ #category : #'as yet unclassified' }
 ManejadorDeMensajes >> comoCadenaConcatenadaResumidaALongitud: longitud [
 	| mensajesCopia |
 	mensajesCopia := mensajes collect: [  :mensaje|

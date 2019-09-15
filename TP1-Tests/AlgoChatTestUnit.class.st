@@ -167,6 +167,57 @@ AlgoChatTestUnit >> test11AgregoUsuariosAlCanalYEstan [
 	algoChat agregarUsuario: 'Juan' alCanal: 'anuncios'.
 	algoChat agregarUsuario: 'Carlos' alCanal: 'anuncios'.
 	"Assert"
-	self assert: (algoChat usuariosEnCanal: 'anuncios') equals: 'Juan | Carlos'.
+	self assert: (algoChat usuariosEnCanal: 'anuncios') equals: 'Juan,Carlos'.
+
+
+]
+
+{ #category : #tests }
+AlgoChatTestUnit >> test12CreoConversacionConUsuariosYEstan [
+	"Arrange"
+	| algoChat |
+	algoChat := AlgoChat new.
+	algoChat agregarUsuarioConNombre: 'Juan'.
+	algoChat agregarUsuarioConNombre: 'Carlos'.
+	"Act"
+	algoChat crearConversacionConUsuarios: 'Juan,Carlos'.
+	"Assert"
+	self assert: (algoChat usuariosEnConversacion: 'Juan,Carlos') equals: 'Juan,Carlos'.
+	
+	
+
+]
+
+{ #category : #tests }
+AlgoChatTestUnit >> test13CreoConversacionConUsuariosMandoMensajeYLoRecibenComoNotificacion [
+	"Arrange"
+	| algoChat |
+	algoChat := AlgoChat new.
+	algoChat agregarUsuarioConNombre: 'Juan'.
+	algoChat agregarUsuarioConNombre: 'Carlos'.
+	algoChat agregarUsuarioConNombre: 'Maria'.
+	"Act"
+	algoChat crearConversacionConUsuarios: 'Juan,Carlos'.
+	algoChat publicarMensaje: 'hola' enConversacion: 'Juan,Carlos'.
+	algoChat publicarMensaje: 'todo bien?' enConversacion: 'Juan,Carlos'.
+	"Assert"
+	self assert: (algoChat getNotificacionesDeUsuario: 'Juan') equals: 'hola | todo bien?'.
+	self assert: (algoChat getNotificacionesDeUsuario: 'Carlos') equals: 'hola | todo bien?'.	
+]
+
+{ #category : #tests }
+AlgoChatTestUnit >> test14CreoConversacionConUsuariosMandoMensajeYElUsuarioQueNoEstaNoLoRecibe [
+	"Arrange"
+	| algoChat |
+	algoChat := AlgoChat new.
+	algoChat agregarUsuarioConNombre: 'Juan'.
+	algoChat agregarUsuarioConNombre: 'Carlos'.
+	algoChat agregarUsuarioConNombre: 'Maria'.
+	"Act"
+	algoChat crearConversacionConUsuarios: 'Juan,Carlos'.
+	algoChat publicarMensaje: 'hola' enConversacion: 'Juan,Carlos'.
+	algoChat publicarMensaje: 'todo bien?' enConversacion: 'Juan,Carlos'.
+	"Assert"
+	self assert: (algoChat getNotificacionesDeUsuario: 'Maria') equals: ''.
 
 ]
