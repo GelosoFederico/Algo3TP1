@@ -14,13 +14,18 @@ AlgoChat >> agregarCanalConNombre: nombreCanal [
 ]
 
 { #category : #'as yet unclassified' }
+AlgoChat >> agregarUsuario: nombreUsuario alCanal: nombreCanal [
+	(canales at: nombreCanal) agregarUsuario: (usuarios at: nombreUsuario).
+]
+
+{ #category : #'as yet unclassified' }
 AlgoChat >> agregarUsuarioConNombre: nombre [
 	usuarios at: nombre put: (Usuario conNombre: nombre).
 ]
 
 { #category : #'as yet unclassified' }
 AlgoChat >> enviarMensaje: mensaje aUsuario: usuarioDestino [
-	(usuarios at: usuarioDestino) recibeMensaje: mensaje para: usuarioDestino.
+	(usuarios at: usuarioDestino) recibeMensajeDirecto: mensaje.
 ]
 
 { #category : #'as yet unclassified' }
@@ -35,13 +40,13 @@ AlgoChat >> getCantidadUsuarios [
 
 { #category : #'as yet unclassified' }
 AlgoChat >> getNotificacionesDeUsuario: nombreUsuario [
-	^ (usuarios at: nombreUsuario) notificacionesDeUsuario: nombreUsuario.
+	^ (usuarios at: nombreUsuario) notificaciones.
 
 ]
 
 { #category : #'as yet unclassified' }
 AlgoChat >> getNotificacionesDeUsuario: nombreUsuario resumidasALongitud: long [
-	^ (usuarios at: nombreUsuario) notificacionesDeUsuario: nombreUsuario resumidasALongitud: long.
+	^ (usuarios at: nombreUsuario) notificacionesResumidasALongitud: long.
 
 ]
 
@@ -58,10 +63,15 @@ AlgoChat >> mensajesDelCanal: canalNombre [
 
 { #category : #'as yet unclassified' }
 AlgoChat >> mensajesDelCanal: canalNombre resumidosALongitud: longitud [
-	^ (canales at: canalNombre) mensajes resumidosALongitud: longitud.
+	^ (canales at: canalNombre) mensajesResumidosALongitud: longitud.
 ]
 
 { #category : #'as yet unclassified' }
 AlgoChat >> publicarMensaje: mensaje enCanal: canalDestino [
 	(canales at: canalDestino) recibeMensaje: mensaje.
+]
+
+{ #category : #'as yet unclassified' }
+AlgoChat >> usuariosEnCanal: nombreCanal [
+	^ (canales at: nombreCanal) nombresUsuarios.
 ]

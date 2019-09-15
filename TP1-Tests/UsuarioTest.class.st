@@ -59,44 +59,17 @@ UsuarioTest >> test03MandoMensajeAUsuarioYNoLoRecibeComoNotificacion [
 ]
 
 { #category : #tests }
-UsuarioTest >> test04MandoMensajeAUsuarioQueEraParaOtroYNoLoRecibeComoNotificacion [
-	"Arrange"
-	| usuario |
-	usuario := Usuario conNombre: 'Carlos'.
-	
-	"Act"
-	usuario recibeMensaje: 'Hola Juan' para: 'Juan'.
-	
-	"Assert"
-	self assert: usuario notificaciones equals: ''.
-	
-]
-
-{ #category : #tests }
-UsuarioTest >> test05MandoMensajeParaUsuarioYLoRecibeComoNotificacion [
-	"Arrange"
-	| usuario |
-	usuario := Usuario conNombre: 'Carlos'.
-	
-	"Act"
-	usuario recibeMensaje: 'Hola Carlos' para: 'Carlos'.
-	
-	"Assert"
-	self assert: usuario notificaciones equals: 'Hola Carlos'.
-]
-
-{ #category : #tests }
 UsuarioTest >> test06Mando2MensajesAlUsuarioYLosGuardaYMuestraBien [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Carlos'.
 	
 	"Act"
-	usuario recibeMensaje: 'Hola che' para: 'Carlos'.
-	usuario recibeMensaje: 'Como va?' para: 'Carlos'.
+	usuario recibeMensajeComoNotificacion: 'Hola che'.
+	usuario recibeMensajeComoNotificacion: 'Como va?'.
 	
 	"Assert"
-	self assert: usuario notificaciones equals: 'Hola che | Como va?'.
+	self assert: (usuario notificaciones) equals: 'Hola che | Como va?'.
 ]
 
 { #category : #tests }
@@ -127,32 +100,6 @@ UsuarioTest >> test08UsuarioRecibeMensajeConSuNombreArrobadSinMayusculaYNoAparec
 ]
 
 { #category : #tests }
-UsuarioTest >> test09UsuarioRecibeMensajesYMuestraNotificacionesCuandoPreguntaPorSuNombre [
-	"Arrange"
-	| usuario |
-	usuario := Usuario conNombre: 'Carlos'.
-	
-	"Act"
-	usuario recibeMensaje: 'Hola' para: 'Carlos'.
-	
-	"Assert"
-	self assert: (usuario notificacionesDeUsuario: 'Carlos') equals: 'Hola'.
-]
-
-{ #category : #tests }
-UsuarioTest >> test10UsuarioRecibeMensajesYNoMuestraNotificacionesCuandoPreguntaPorOtroNombre [
-	"Arrange"
-	| usuario |
-	usuario := Usuario conNombre: 'Carlos'.
-	
-	"Act"
-	usuario recibeMensaje: 'Hola' para: 'Juan'.
-	
-	"Assert"
-	self assert: (usuario notificacionesDeUsuario: 'Carlos') equals: ''.
-]
-
-{ #category : #tests }
 UsuarioTest >> test11UsuarioRecibeMensajeDeMasDe4CaracteresYLoMuestraAcortadoA4 [
 	"Arrange"
 	| usuario |
@@ -162,7 +109,7 @@ UsuarioTest >> test11UsuarioRecibeMensajeDeMasDe4CaracteresYLoMuestraAcortadoA4 
 	usuario recibeMensajeComoNotificacion: 'Hola como va?'.
 	
 	"Assert"
-	self assert: (usuario notificacionesDeUsuario: 'Carlos' resumidasALongitud: 4) equals: 'Hola...'.
+	self assert: (usuario notificacionesResumidasALongitud: 4) equals: 'Hola...'.
 ]
 
 { #category : #tests }
@@ -175,6 +122,6 @@ UsuarioTest >> test12UsuarioRecibeMensajeDeMasDe4CaracteresImprimeAcortadoA4YDes
 	usuario recibeMensajeComoNotificacion: 'Hola como va?'.
 	
 	"Assert"
-	self assert: (usuario notificacionesDeUsuario: 'Carlos' resumidasALongitud: 4) equals: 'Hola...'.
-	self assert: (usuario notificacionesDeUsuario: 'Carlos' ) equals: 'Hola como va?'.
+	self assert: (usuario notificacionesResumidasALongitud: 4) equals: 'Hola...'.
+	self assert: (usuario notificaciones ) equals: 'Hola como va?'.
 ]

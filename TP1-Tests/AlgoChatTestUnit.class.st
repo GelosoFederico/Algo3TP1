@@ -103,14 +103,15 @@ AlgoChatTestUnit >> test06MandoDosMensajeAUnUsuarioConElNombreIncorrectoYNoLosGu
 { #category : #tests }
 AlgoChatTestUnit >> test07MandoUnMensajeAUnUsuarioQueNoExisteYSaleUnaExcepcion [
 	"Arrange"
-	| algoChat |
+	| algoChat salida|
 	algoChat := AlgoChat new.
 	algoChat agregarUsuarioConNombre: 'Carlos'.
 	"Act"
 	algoChat enviarMensaje: 'Hola che' aUsuario: 'Carlos'.
 	algoChat enviarMensaje: 'Todo bien?' aUsuario: 'Carlos'.
+	[algoChat getNotificacionesDeUsuario: 'Juan'] on: KeyNotFound do: [ salida := true].
 	"Assert"
-	self assert: (algoChat getNotificacionesDeUsuario: 'Juan' ) equals: ''.
+	self assert: salida.
 
 ]
 
@@ -137,6 +138,35 @@ AlgoChatTestUnit >> test09MandoDosMensajesAUnCanalYLosMuestraResumidosAUnaLongit
 	algoChat publicarMensaje: 'Hola todo el mundo' enCanal: 'anuncios'.
 	algoChat publicarMensaje: 'Hola doctor Nick' enCanal: 'anuncios'.
 	"Assert"	
-	self assert: (algoChat mensajesDelCanal: 'anuncios' resumidosALongitud: 17) equals: 'Hola todo el mun... | Hola doctor Nick'.
+	self assert: (algoChat mensajesDelCanal: 'anuncios' resumidosALongitud: 17) equals: 'Hola todo el mund... | Hola doctor Nick'.
 	
+]
+
+{ #category : #tests }
+AlgoChatTestUnit >> test10MandoUnMensajeAUnCanalQueNoExisteYLevantaExcepcion [
+	"Arrange"
+	| algoChat salida|
+	algoChat := AlgoChat new.
+	algoChat agregarCanalConNombre: 'anuncios'.
+	"Act"
+	[algoChat mensajesDelCanal: 'general'] on: KeyNotFound do: [ salida := true].
+	"Assert"
+	self assert: salida.
+
+]
+
+{ #category : #tests }
+AlgoChatTestUnit >> test11AgregoUsuariosAlCanalYEstan [
+	"Arrange"
+	| algoChat |
+	algoChat := AlgoChat new.
+	algoChat agregarUsuarioConNombre: 'Juan'.
+	algoChat agregarUsuarioConNombre: 'Carlos'.
+	algoChat agregarCanalConNombre: 'anuncios'.
+	"Act"
+	algoChat agregarUsuario: 'Juan' alCanal: 'anuncios'.
+	algoChat agregarUsuario: 'Carlos' alCanal: 'anuncios'.
+	"Assert"
+	self assert: (algoChat usuariosEnCanal: 'anuncios') equals: 'Juan | Carlos'.
+
 ]

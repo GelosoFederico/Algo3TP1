@@ -31,14 +31,19 @@ Canal >> cantidadUsuarios [
 { #category : #initialization }
 Canal >> initialize [ 
 	usuarios := OrderedCollection new.
-	mensajes := OrderedCollection new.	
+	mensajes := ManejadorDeMensajes new.	
 	nombre := String new.
 ]
 
 { #category : #accessing }
 Canal >> mensajes [
-	^ mensajes joinUsing: ' | '.
+	^ mensajes comoCadenaConcatenada.
 
+]
+
+{ #category : #'as yet unclassified' }
+Canal >> mensajesResumidosALongitud: cantidadCaracteres [
+	^ mensajes comoCadenaConcatenadaResumidaALongitud: cantidadCaracteres.
 ]
 
 { #category : #accessing }
@@ -54,16 +59,12 @@ Canal >> nombre: nuevoNombre [
 
 { #category : #'as yet unclassified' }
 Canal >> nombresUsuarios [
-	| nombresUsuarios |
-	nombresUsuarios := usuarios collect: [ :usuario | 
-		usuario nombre. 
-	].
-	^ nombresUsuarios joinUsing: ' | '.
+	^ (ManejadorDeMensajes conUsuarios: usuarios) comoCadenaConcatenada .
 ]
 
 { #category : #'as yet unclassified' }
 Canal >> recibeMensaje: mensaje [
-	mensajes add: mensaje.
+	mensajes agregar: mensaje.
 	usuarios do: [ :usuario|
 		usuario recibeMensaje: mensaje ].
 ]

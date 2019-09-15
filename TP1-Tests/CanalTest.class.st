@@ -151,3 +151,22 @@ CanalTest >> test09VariosUsuariosNombradosRecibenElMensajeRecibeMensajeEnCanalYE
 	self assert: maria notificaciones equals: 'Hola @Juan y @Maria'.
 
 ]
+
+{ #category : #tests }
+CanalTest >> test10CreoCanalConVariosUsuariosYMeMuestraLosNombres [
+	"Arrange"
+	| canal carlos juan andrea nombres|
+	canal := Canal new.
+	carlos := Usuario conNombre: 'Carlos'.
+	juan := Usuario conNombre: 'Juan'.
+	andrea := Usuario conNombre: 'Andrea'.
+	
+	"Act"
+	canal agregarUsuario: carlos. 
+	canal agregarUsuario: juan. 
+	canal agregarUsuario: andrea. 
+	nombres := canal nombresUsuarios.
+	
+	"Assert"
+	self assert: nombres equals: 'Carlos | Juan | Andrea'. 	
+]
