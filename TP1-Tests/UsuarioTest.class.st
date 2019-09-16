@@ -33,7 +33,7 @@ UsuarioTest >> test01CreoUsuarioConNombreYTieneEseNombre [
 	self assert: nombre equals: 'Carlos'.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 UsuarioTest >> test02CreoUsuarioYNoTieneNotificaciones [
 	"Arrange"
 	| usuario |
@@ -86,7 +86,7 @@ UsuarioTest >> test07UsuarioRecibeMensajeConSuNombreArrobadoYLoRecibeComoNotific
 ]
 
 { #category : #tests }
-UsuarioTest >> test08UsuarioRecibeMensajeConSuNombreArrobadSinMayusculaYNoApareceComoNotificacion [
+UsuarioTest >> test08UsuarioRecibeMensajeConSuNombreArrobadoSinMayusculaYNoApareceComoNotificacion [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Carlos'.
@@ -149,7 +149,43 @@ UsuarioTest >> test14UsuarioPausaUnCanalYNoRecibeMensajesDeAhiQuNoLoNombren [
 	"Act"
 	usuario recibeMensaje: 'Dile a Bart que venga aqui' delCanal: 'general'.
 	usuario recibeMensaje: 'Quien es @Nelson' delCanal: 'general'.
-	
 	"Assert"
 	self assert: (usuario notificaciones ) equals: 'Quien es @Nelson'.
+]
+
+{ #category : #tests }
+UsuarioTest >> test15UsuarioPausaUnCanalYNoRecibeMensajesDeAhiQuNoLoNombrenDespuesLoReanudaYRecibeLosQueMandenAhi [
+	"Arrange"
+	| usuario |
+	usuario := Usuario conNombre: 'Nelson'.
+	usuario agregarPalabraClave: 'Bart'.
+	"Act"
+	usuario pausarCanal: 'general'.
+	usuario recibeMensaje: 'Dile a Bart que venga aqui' delCanal: 'general'.
+	usuario recibeMensaje: 'Quien es @Nelson' delCanal: 'general'.
+	usuario reanudarCanal: 'general'.
+	usuario recibeMensaje: 'Nelson? Le habia prohibido a Bart jugar con ese pequeno monstruo'.
+	"Assert"
+	self assert: (usuario notificaciones ) equals: 'Quien es @Nelson | Nelson? Le habia prohibido a Bart jugar con ese pequeno monstruo'.
+]
+
+{ #category : #tests }
+UsuarioTest >> test16UsuarioRecibeMasDeUnMensajeYLosAcortaLosQueSonNecesarios [
+	"Arrange"
+	| usuario |
+	usuario := Usuario conNombre: 'Ronnie'.	
+	"Act"
+	usuario recibeMensajeComoNotificacion: 'Im a wheel'.
+	usuario recibeMensajeComoNotificacion: 'Im a wheel'.
+	usuario recibeMensajeComoNotificacion: 'I can roll'.
+	usuario recibeMensajeComoNotificacion: 'I can feel'.
+	usuario recibeMensajeComoNotificacion: 'And you cant stop me turning'.
+	usuario recibeMensajeComoNotificacion: 'Cause Im the sun'.
+	usuario recibeMensajeComoNotificacion: 'Im the sun'.
+	usuario recibeMensajeComoNotificacion: 'I can move'.
+	usuario recibeMensajeComoNotificacion: 'I can roll'.
+	usuario recibeMensajeComoNotificacion: 'But you ll never stop me burning'.
+	
+	"Assert"
+	self assert: (usuario notificacionesResumidasALongitud: 10 ) equals: 'Im a wheel | Im a wheel | I can roll | I can feel | And you ca... | Cause Im t... | Im the sun | I can move | I can roll | But you ll...'.
 ]

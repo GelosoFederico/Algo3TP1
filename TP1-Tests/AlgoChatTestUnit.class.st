@@ -221,3 +221,46 @@ AlgoChatTestUnit >> test14CreoConversacionConUsuariosMandoMensajeYElUsuarioQueNo
 	self assert: (algoChat getNotificacionesDeUsuario: 'Maria') equals: ''.
 
 ]
+
+{ #category : #tests }
+AlgoChatTestUnit >> test15UsuariosTienenPalabrasClaveYRecibenNotificacionesCuandoEstanEsasPalabras [
+	"Arrange"
+	| algoChat |
+	algoChat := AlgoChat new.
+	algoChat agregarUsuarioConNombre: 'Juan'.
+	algoChat agregarUsuarioConNombre: 'Carlos'.
+	algoChat agregarCanalConNombre: 'general'.
+	algoChat agregarUsuario: 'Juan' alCanal: 'general'.
+	algoChat agregarUsuario: 'Carlos' alCanal: 'general'.
+	"Act"
+	algoChat agregarPalabraClave: 'TP' alUsuario: 'Juan'.
+	algoChat agregarPalabraClave: 'clase' alUsuario: 'Carlos'.
+	algoChat publicarMensaje: 'hola' enCanal: 'general'.
+	algoChat publicarMensaje: 'El TP ya esta subido' enCanal: 'general'.
+	algoChat publicarMensaje: 'Lo visto en clase esta subido' enCanal: 'general'.
+	algoChat publicarMensaje: 'Traigan las dudas del TP para la siguiente clase' enCanal: 'general'.
+	"Assert"
+	self assert: (algoChat getNotificacionesDeUsuario: 'Carlos') equals: 'Lo visto en clase esta subido | Traigan las dudas del TP para la siguiente clase'.
+	self assert: (algoChat getNotificacionesDeUsuario: 'Juan') equals: 'El TP ya esta subido | Traigan las dudas del TP para la siguiente clase'.
+
+]
+
+{ #category : #tests }
+AlgoChatTestUnit >> test16UsuarioPausaNotificacionesDePalabrasDeUnCanalYDejaDeRecibirlas [
+	"Arrange"
+	| algoChat |
+	algoChat := AlgoChat new.
+	algoChat agregarUsuarioConNombre: 'juan'.
+	algoChat agregarCanalConNombre: 'anuncios'.	
+	algoChat agregarUsuario: 'juan' alCanal: 'anuncios'.
+	
+	algoChat agregarPalabraClave: 'clase' alUsuario: 'juan'.
+	algoChat agregarPalabraClave: 'notas' alUsuario: 'juan'.
+
+	algoChat publicarMensaje: 'notas: juan 7' enCanal: 'anuncios'.
+	algoChat pausarPalabrasDeCanal: 'anuncios' paraUsuario: 'juan'.
+	algoChat publicarMensaje: 'notas recu: juan negado 4' enCanal: 'anuncios'.	
+	algoChat publicarMensaje: '@juan traer libreta' enCanal: 'anuncios'.
+	
+	self assert: (algoChat getNotificacionesDeUsuario: 'juan') equals: 'notas: juan 7 | @juan traer libreta'.
+]
