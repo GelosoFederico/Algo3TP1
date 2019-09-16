@@ -3,9 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'nombre',
-		'notificaciones',
-		'palabrasClave',
-		'canalesPausados'
+		'notificador',
+		'notificaciones'
 	],
 	#category : #TP1
 }
@@ -20,15 +19,15 @@ Usuario class >> conNombre: nombre [
 
 { #category : #'as yet unclassified' }
 Usuario >> agregarPalabraClave: palabra [
-	palabrasClave add: palabra.
+	notificador agregarPalabraClave: palabra.
 ]
 
 { #category : #initialization }
 Usuario >> initialize [
 	nombre := String new.
+	notificador := Notificador new.
 	notificaciones := ManejadorDeMensajes new.
-	palabrasClave := OrderedCollection new.
-	canalesPausados := OrderedCollection new.
+
 ]
 
 { #category : #accessing }
@@ -39,7 +38,7 @@ Usuario >> nombre [
 
 { #category : #accessing }
 Usuario >> nombre: unNombre [
-	palabrasClave add: ('@',unNombre).
+	notificador nombreUsuario: unNombre.
 	nombre := unNombre.
 ]
 
@@ -51,25 +50,30 @@ Usuario >> notificaciones [
 { #category : #'as yet unclassified' }
 Usuario >> notificacionesResumidasALongitud: cantidadCaracteres [
 	^ notificaciones comoCadenaConcatenadaResumidaALongitud: cantidadCaracteres.
+	
+
 ]
 
 { #category : #'as yet unclassified' }
 Usuario >> pausarCanal: canalNombre [
-	canalesPausados add: canalNombre.
+	notificador pausarCanal: canalNombre.
+]
+
+{ #category : #'as yet unclassified' }
+Usuario >> reanudarCanal: canalNombre [
+	notificador reanudarCanal: canalNombre.
 ]
 
 { #category : #'input/output' }
 Usuario >> recibeMensaje: mensaje [
-	( (mensaje findAnySubstring: palabrasClave startingAt: 1) < (mensaje size)) ifTrue: [ 
-		self recibeMensajeComoNotificacion: mensaje ].
+	notificaciones agregar: (notificador analizaMensaje: mensaje).
+
 ]
 
 { #category : #'as yet unclassified' }
 Usuario >> recibeMensaje: mensaje delCanal: canalNombre [
-	( (mensaje findAnySubstring: palabrasClave startingAt: 1) < (mensaje size)) ifTrue: [ 
-		(canalNombre findAnySubstring: canalesPausados startingAt: 1) >= (canalNombre size) ifTrue: [ 
-			self recibeMensajeComoNotificacion: mensaje 	 ]
-		].
+	notificaciones agregar: (notificador analizaMensaje: mensaje delCanal: canalNombre).
+	
 ]
 
 { #category : #private }

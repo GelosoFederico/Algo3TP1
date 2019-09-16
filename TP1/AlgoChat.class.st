@@ -104,6 +104,11 @@ AlgoChat >> publicarMensaje: mensaje enConversacion: conversacionDestino [
 ]
 
 { #category : #'as yet unclassified' }
+AlgoChat >> reanudarPalabrasDeCanal: nombreCanal paraUsuario: nombreUsuario. [
+	(usuarios conNombre: nombreUsuario) reanudarCanal: nombreCanal.	
+]
+
+{ #category : #'as yet unclassified' }
 AlgoChat >> usuariosEnCanal: nombreCanal [
 	^ (canales at: nombreCanal) nombresUsuarios.
 ]

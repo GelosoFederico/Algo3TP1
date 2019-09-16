@@ -22,7 +22,7 @@ ManejadorDeMensajes class >> conUsuarios: conjuntoUsuarios [
 
 { #category : #adding }
 ManejadorDeMensajes >> agregar: mensaje [
-	mensajes add: mensaje.
+	(mensaje isEmpty) ifFalse: [mensajes add: mensaje.].
 ]
 
 { #category : #'private ' }

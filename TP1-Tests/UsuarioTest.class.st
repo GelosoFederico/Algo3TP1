@@ -140,13 +140,16 @@ UsuarioTest >> test13UsuarioAgregaPalabrasClavesYRecibeMensajeConYSinEsasPalabra
 ]
 
 { #category : #tests }
-UsuarioTest >> test14UsuarioPausaUnCanalYNoRecibeMensajesDeAhi [
+UsuarioTest >> test14UsuarioPausaUnCanalYNoRecibeMensajesDeAhiQuNoLoNombren [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Nelson'.
+	usuario agregarPalabraClave: 'Bart'.
 	usuario pausarCanal: 'general'.
 	"Act"
-	usuario recibeMensaje: 'Quien es @Nelson' delCanal: 'general'.	
+	usuario recibeMensaje: 'Dile a Bart que venga aqui' delCanal: 'general'.
+	usuario recibeMensaje: 'Quien es @Nelson' delCanal: 'general'.
+	
 	"Assert"
-	self assert: (usuario notificaciones ) equals: ''.
+	self assert: (usuario notificaciones ) equals: 'Quien es @Nelson'.
 ]
