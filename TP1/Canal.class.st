@@ -18,12 +18,12 @@ Canal class >> conNombre: nombre [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #setter }
 Canal >> agregarUsuario: nuevoUsuario [
 	usuarios agregarUsuario: nuevoUsuario.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - properties' }
 Canal >> cantidadUsuarios [
 	^ usuarios cantidadUsuarios.
 ]
@@ -41,7 +41,7 @@ Canal >> mensajes [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - properties' }
 Canal >> mensajesResumidosALongitud: cantidadCaracteres [
 	^ mensajes comoCadenaConcatenadaResumidaALongitud: cantidadCaracteres.
 ]
@@ -52,12 +52,12 @@ Canal >> nombre [
 
 ]
 
-{ #category : #accessing }
+{ #category : #setter }
 Canal >> nombre: nuevoNombre [
 	nombre := nuevoNombre.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - properties' }
 Canal >> nombresUsuarios [
 	^ usuarios nombresUsuarios.
 ]
@@ -68,7 +68,7 @@ Canal >> recibeMensaje: mensaje [
 	usuarios recibenMensaje: mensaje delCanal: self nombre. 
 ]
 
-{ #category : #'private ' }
+{ #category : #private }
 Canal >> usuarios: conjuntoDeUsuarios [
 	usuarios := conjuntoDeUsuarios.
 ]
