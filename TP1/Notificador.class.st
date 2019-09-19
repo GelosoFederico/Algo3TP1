@@ -37,7 +37,7 @@ Notificador >> analizaMensaje: mensaje delCanal: canal [
 		ifFalse: [ ^ self analizaMensaje: mensaje ].	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private ' }
 Notificador >> analizaMensajeDeCanalPausado: mensaje [
 	( (self usuarioFueNombradoEn: mensaje) )
 		ifTrue: [ ^ mensaje ]
@@ -49,7 +49,7 @@ Notificador >> aparecePalabraClaveEn: mensaje [
 	^ (mensaje findAnySubstring: palabrasClave startingAt: 1) < (mensaje size).
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private ' }
 Notificador >> canalEstaPausado: canalNombre [
 	^ canalesPausados includes: canalNombre.
 ]
@@ -76,7 +76,7 @@ Notificador >> reanudarCanal: canalNombre [
 	canalesPausados remove: canalNombre.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private ' }
 Notificador >> usuarioFueNombradoEn: mensaje [
 	^ ((mensaje findString: ('@',nombreUsuario )) > 0).
 ]
