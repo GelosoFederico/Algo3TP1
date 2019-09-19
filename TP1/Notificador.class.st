@@ -31,7 +31,7 @@ Notificador >> analizaMensaje: mensaje [
 
 { #category : #'as yet unclassified' }
 Notificador >> analizaMensaje: mensaje delCanal: canal [
-	" Esto claramente se resuelve con herencia pero tengo que verlo mejor. Un analizador de canal pausado y de canal no pausado?"
+	" Esto pareciera poder resolverse con polimorfismo pero no puedo detectar como. Un analizador de canal pausado y de canal no pausado?"
 	( self canalEstaPausado: canal )
 		ifTrue: [ ^ self analizaMensajeDeCanalPausado: mensaje ]
 		ifFalse: [ ^ self analizaMensaje: mensaje ].	
