@@ -59,7 +59,7 @@ UsuarioTest >> test03MandoMensajeAUsuarioYNoLoRecibeComoNotificacion [
 ]
 
 { #category : #tests }
-UsuarioTest >> test06Mando2MensajesAlUsuarioYLosGuardaYMuestraBien [
+UsuarioTest >> test04Mando2MensajesAlUsuarioYLosGuardaYMuestraBien [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Carlos'.
@@ -73,7 +73,7 @@ UsuarioTest >> test06Mando2MensajesAlUsuarioYLosGuardaYMuestraBien [
 ]
 
 { #category : #tests }
-UsuarioTest >> test07UsuarioRecibeMensajeConSuNombreArrobadoYLoRecibeComoNotificacion [
+UsuarioTest >> test05UsuarioRecibeMensajeConSuNombreArrobadoYLoRecibeComoNotificacion [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Carlos'.
@@ -86,7 +86,7 @@ UsuarioTest >> test07UsuarioRecibeMensajeConSuNombreArrobadoYLoRecibeComoNotific
 ]
 
 { #category : #tests }
-UsuarioTest >> test08UsuarioRecibeMensajeConSuNombreArrobadoSinMayusculaYNoApareceComoNotificacion [
+UsuarioTest >> test06UsuarioRecibeMensajeConSuNombreArrobadoSinMayusculaYNoApareceComoNotificacion [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Carlos'.
@@ -100,7 +100,7 @@ UsuarioTest >> test08UsuarioRecibeMensajeConSuNombreArrobadoSinMayusculaYNoApare
 ]
 
 { #category : #tests }
-UsuarioTest >> test11UsuarioRecibeMensajeDeMasDe4CaracteresYLoMuestraAcortadoA4 [
+UsuarioTest >> test07UsuarioRecibeMensajeDeMasDe4CaracteresYLoMuestraAcortadoA4 [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Carlos'.
@@ -113,7 +113,7 @@ UsuarioTest >> test11UsuarioRecibeMensajeDeMasDe4CaracteresYLoMuestraAcortadoA4 
 ]
 
 { #category : #tests }
-UsuarioTest >> test12UsuarioRecibeMensajeDeMasDe4CaracteresImprimeAcortadoA4YDespuesLoImprimeNormal [
+UsuarioTest >> test08UsuarioRecibeMensajeDeMasDe4CaracteresImprimeAcortadoA4YDespuesLoImprimeNormal [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Carlos'.
@@ -127,7 +127,7 @@ UsuarioTest >> test12UsuarioRecibeMensajeDeMasDe4CaracteresImprimeAcortadoA4YDes
 ]
 
 { #category : #tests }
-UsuarioTest >> test13UsuarioAgregaPalabrasClavesYRecibeMensajeConYSinEsasPalabras [
+UsuarioTest >> test09UsuarioAgregaPalabrasClavesYRecibeMensajeConYSinEsasPalabras [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Homero'.
@@ -140,7 +140,7 @@ UsuarioTest >> test13UsuarioAgregaPalabrasClavesYRecibeMensajeConYSinEsasPalabra
 ]
 
 { #category : #tests }
-UsuarioTest >> test14UsuarioPausaUnCanalYNoRecibeMensajesDeAhiQuNoLoNombren [
+UsuarioTest >> test10UsuarioPausaUnCanalYNoRecibeMensajesDeAhiQuNoLoNombren [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Nelson'.
@@ -154,7 +154,7 @@ UsuarioTest >> test14UsuarioPausaUnCanalYNoRecibeMensajesDeAhiQuNoLoNombren [
 ]
 
 { #category : #tests }
-UsuarioTest >> test15UsuarioPausaUnCanalYNoRecibeMensajesDeAhiQuNoLoNombrenDespuesLoReanudaYRecibeLosQueMandenAhi [
+UsuarioTest >> test11UsuarioPausaUnCanalYNoRecibeMensajesDeAhiQuNoLoNombrenDespuesLoReanudaYRecibeLosQueMandenAhi [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Nelson'.
@@ -170,7 +170,7 @@ UsuarioTest >> test15UsuarioPausaUnCanalYNoRecibeMensajesDeAhiQuNoLoNombrenDespu
 ]
 
 { #category : #tests }
-UsuarioTest >> test16UsuarioRecibeMasDeUnMensajeYLosAcortaLosQueSonNecesarios [
+UsuarioTest >> test12UsuarioRecibeMasDeUnMensajeYLosAcortaLosQueSonNecesarios [
 	"Arrange"
 	| usuario |
 	usuario := Usuario conNombre: 'Ronnie'.	
